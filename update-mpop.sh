@@ -1,8 +1,8 @@
 #!/bin/bash
 
 reset() {
-	git reset
-	git checkout -- .
+	git reset --hard HEAD
+	git clean -fd
 }
 
 pushd ~/mpop/ > /dev/null
