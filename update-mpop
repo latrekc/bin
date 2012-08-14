@@ -12,7 +12,7 @@ reset
 
 git fetch
 git checkout prerelease-mail
-
+git pull origin prerelease-mail
 
 # запускать нужно из своей копии mpop
 ./build_fe_utf.sh
@@ -28,3 +28,4 @@ sudo /etc/init.d/httpd restart
 reset
 
 popd > /dev/null
+sudo rm -rf mpop.orig
