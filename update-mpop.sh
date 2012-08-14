@@ -1,7 +1,8 @@
 #!/bin/bash
 
 reset() {
-	git checkout -- .
+	git reset --hard HEAD
+	git clean -fd
 }
 
 last_rev() {
