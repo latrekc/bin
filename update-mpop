@@ -1,11 +1,45 @@
 #!/bin/bash
 
+# Reset
+Color_Off='\e[0m'       # Text Reset
+White='\e[0;37m'        # White
+On_Red='\e[41m'         # Red
+On_Blue='\e[44m'        # Blue
+
+color_message() {
+	message=$1
+	color=$2
+
+	COLUMNS=$((`tput cols` - 1))
+
+	echo -n -e "${White}${color}${message}"
+
+	for i in $(seq ${#1} ${COLUMNS})
+	do
+		echo -n " "
+	done
+
+	echo -n -e "${Color_Off}"
+	echo
+}
+
 reset() {
 	git reset --hard HEAD
 	git clean -fd
 }
 
+error() {
+	color_message "$1" "$On_Red"
+	exit
+}
+
+header() {
+	color_message "$1" "$On_Blue"
+}
+
 pushd ~/mpop/ > /dev/null
+
+header "Update mpop stated"
 
 # на всякий случай откатим все изменения в папке
 reset
@@ -14,6 +48,13 @@ git fetch
 git checkout prerelease-mail
 git pull origin prerelease-mail
 
+if [ ! $? ]
+then
+	error "Can't update mPOP git"
+fi
+
+header configure
+
 # запускать нужно из своей копии mpop
 ./build_fe_utf.sh
 
@@ -21,7 +62,21 @@ git pull origin prerelease-mail
 ./configure --enable-mail --enable-perl --enable-spamdelclient --enable-mysqlproc --enable-uri-list --enable-mail-ajax --enable-pro --enable-utf --enable-kav8 --enable-httplib --enable-kas5
 make -j 4
 
+if [ ! $? ]
+then
+	error "Can't prepare to install mpop"
+fi
+
+header 'sudo make install'
 sudo make install
+
+if [ ! $? ]
+then
+	error "Can't install mpop"
+fi
+
+header 'Apache restart'
+
 sudo /etc/init.d/httpd restart
 
 # после этого нужно откатить все изменения в папке
@@ -29,3 +84,5 @@ reset
 
 popd > /dev/null
 sudo rm -rf mpop.orig
+
+header "Update mPOP successfully"
