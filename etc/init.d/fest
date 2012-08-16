@@ -7,7 +7,7 @@ SCRIPT="$(basename $0)"
 PIDFILE="/var/run/$SCRIPT.pid"
 ps -fe | grep "$SCRIPT" | head -n1 | cut -d" " -f 6 > ${PIDFILE}
 
-USER="root" # FIXME — it must be "mail"
+USER="root" # FIXME, it must be "mail"
 
 DAEMON="/usr/local/bin/node"
 ROOT_DIR="/usr/local/fest/"
@@ -16,6 +16,8 @@ SERVER="$ROOT_DIR/lib/proxy.js"
 LOG_FILE="/var/log/$SCRIPT.log"
 
 LOCK_FILE="/var/lock/subsys/$SCRIPT"
+
+CONFIG="/etc/fest.conf"
 
 do_start()
 {
@@ -29,7 +31,7 @@ do_start()
 			chown "$USER" "$LOG_FILE"
 		fi
 
-		su -m "$USER" -c "$DAEMON $SERVER >> $LOG_FILE &" && echo_success || echo_failure
+		su -m "$USER" -c "$DAEMON $SERVER $CONFIG >> $LOG_FILE &" && echo_success || echo_failure
                 RETVAL=$?
                 echo
                 [ $RETVAL -eq 0 ] && touch $LOCK_FILE
