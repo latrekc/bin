@@ -37,6 +37,11 @@ header() {
 	color_message "$1" "$On_Blue"
 }
 
+last_rev() {
+	TYPE=$1
+	git branch -a | grep "remotes/origin/${TYPE}-" | sort  | tail -n 1 | sed 's@remotes/origin/@@' | sed -r 's/\s+//g'
+}
+
 pushd ~/mpop/ > /dev/null
 
 header "Update mpop stated"
@@ -45,8 +50,13 @@ header "Update mpop stated"
 reset
 
 git fetch
-git checkout prerelease-mail
-git pull origin prerelease-mail
+
+LAST_ITERATION=`last_rev 'mail-iteration'`
+
+header "Checkout $LAST_ITERATION"
+
+git checkout "$LAST_ITERATION"
+git pull origin "$LAST_ITERATION"
 
 if [ ! $? ]
 then
