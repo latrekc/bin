@@ -43,7 +43,7 @@ do_start()
 do_stop()
 {
         echo -n $"Stopping $SERVER: "
-        PID=`ps -fe | grep "$SCRIPT" | head -n1 | cut -d" " -f 6`
+        PID=`ps -fe | grep "$SCRIPT" | grep -v "$0" | grep -v grep | head -n1  | awk '{print $2}'`
         kill -9 $PID > /dev/null 2>&1 && echo_success || echo_failure
 
         if [ -f ${PIDFILE} ]; then
