@@ -37,6 +37,36 @@ header() {
 	color_message "$1" "$On_Blue"
 }
 
+last_rev() {
+	TYPE=$1
+	git branch -a | grep "remotes/origin/${TYPE}-" | sort  | tail -n 1 | sed 's@remotes/origin/@@' | sed -r 's/\s+//g'
+}
+
+usage() {
+    cat <<EOF
+    Give me branchname to deploy
+
+    Usage: ${0} <branch>
+
+    Example:
+         ${0} last-iteration       # ищется последняя ветка, начинающаяяся с mail-iteration-
+         ${0} last-prerelease      # ищется последняя ветка, начинающаяяся с prerelease-mail-
+         ${0} prerelease           # используется ветка prerelease-mail !!! возможно не стабильная
+         ${0} <branch>             # используется указанная ветка
+
+EOF
+
+    exit
+}
+
+BRANCH_TO_DEPLOY="$1"
+
+if [[ -z "$BRANCH_TO_DEPLOY" ]]
+then
+    usage
+fi
+
+
 pushd ~/mpop/ > /dev/null
 
 header "Update mpop stated"
@@ -45,8 +75,22 @@ header "Update mpop stated"
 reset
 
 git fetch
-git checkout prerelease-mail
-git pull origin prerelease-mail
+
+case "$BRANCH_TO_DEPLOY" in
+	'last-iteration'  ) BRANCH_TO_DEPLOY=`last_rev 'mail-iteration'`  ;;
+	'last-prerelease' ) BRANCH_TO_DEPLOY=`last_rev 'prerelease-mail'` ;;
+	'prerelease'      ) BRANCH_TO_DEPLOY='prerelease-mail'            ;;
+esac
+
+header "Checkout $BRANCH_TO_DEPLOY"
+
+git checkout "$BRANCH_TO_DEPLOY"
+if [ ! $? ]
+then
+	error "Can't checkout mPOP git"
+fi
+
+git pull origin "$BRANCH_TO_DEPLOY"
 
 if [ ! $? ]
 then
