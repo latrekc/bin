@@ -31,7 +31,7 @@ do_start()
 			chown "$USER" "$LOG_FILE"
 		fi
 
-		su -m "$USER" -c "$DAEMON $SERVER $CONFIG >> $LOG_FILE &" && echo_success || echo_failure
+		su -m "$USER" -c "nohup $DAEMON $SERVER $CONFIG >> $LOG_FILE &" && echo_success || echo_failure
                 RETVAL=$?
                 echo
                 [ $RETVAL -eq 0 ] && touch $LOCK_FILE
