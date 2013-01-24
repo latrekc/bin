@@ -1,25 +1,25 @@
 [core]
 	excludesfile = /home/s.tugovikov/.gitignore_global
-	autocrlf = input
-	safecrlf = true
+#	autocrlf = input
+#	safecrlf = true
 	whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	pager=more
 
 [alias]
-	st        = status --short
-	ci        = commit
-	br        = branch
-	co        = checkout
-	df        = diff
-	lg        = log -p
-	delete    = rm
-	revert    = checkout --  
-	go        = !gitgo 
-	hist      = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-	type      = cat-file -t
-	dump      = cat-file -p
+	st = status --short
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+	delete = rm
+	revert = checkout --  
+	go   = !gitgo
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
 	conflicts = !git ls-files --unmerged | cut -f2 | sort -u | xargs grep -El '<<<<<<<|=======|>>>>>>>'
-	unmerged  = !git ls-files --unmerged | cut -f2 | sort -u
+	unmerged = !git ls-files --unmerged | cut -f2 | sort -u
 
 [user]
 	name = Stanislav Tugovikov
