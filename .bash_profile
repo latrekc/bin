@@ -22,7 +22,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout '
 
-alias python=python2.7
+#alias python=python2.7
 
 # Set git autocompletion and PS1 integration
 if [ -f /etc/bash_completion.d/git ]; then
