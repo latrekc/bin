@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SCRIPT=$(cat <<'javascript'
+    process.stdin.resume();
+    process.stdin.setEncoding('utf8');
+
+    var input = '';
+    process.stdin.on('data', function(chunk) {
+    	input += chunk;
+    });
+
+    function getDependencies(pkg) {
+    	var res = [];
+    	if (pkg.dependencies) {
+    		for (var k in pkg.dependencies) {
+    			res = res.concat(k, getDependencies(pkg.dependencies[k]));
+    		}
+    	}
+    	return res;
+    }
+
+    process.stdin.on('end', function() {
+    	var pkg = JSON.parse(input), views = getDependencies(pkg);
+
+        console.log(JSON.stringify({
+    		source: 'http://isaacs.iriscouch.com/registry/',
+    		target: 'registry',
+    		doc_ids: views
+    	}));
+    });
+javascript
+)
+
+rm -rf npm-shrinkwrap.json node_modules \
+    && npm install \
+    && cat npm-shrinkwrap.json \
+    | /usr/bin/env node -e "$SCRIPT" \
+    | curl - X POST http: //registry:registry@dragonballs.dev.mail.ru:5984/_replicate -d@- -H "Content-Type: application/json"
