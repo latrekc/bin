@@ -39,7 +39,7 @@ header() {
 
 last_rev() {
 	TYPE=$1
-	git branch -a | grep "remotes/origin/${TYPE}-" | sort  | tail -n 1 | sed 's@remotes/origin/@@' | sed -r 's/\s+//g'
+	git branch -a | grep -E "remotes/origin/${TYPE}-" | sort  | tail -n 1 | sed 's@remotes/origin/@@' | sed -r 's/\s+//g'
 }
 
 usage() {
@@ -77,7 +77,7 @@ reset
 git fetch
 
 case "$BRANCH_TO_DEPLOY" in
-	'last-iteration'  ) BRANCH_TO_DEPLOY=`last_rev 'mail-iteration'`  ;;
+	'last-iteration'  ) BRANCH_TO_DEPLOY=`last_rev 'mail-iteration-[0-9]'`  ;;
 	'last-prerelease' ) BRANCH_TO_DEPLOY=`last_rev 'prerelease-mail'` ;;
 	'prerelease'      ) BRANCH_TO_DEPLOY='prerelease-mail'            ;;
 esac

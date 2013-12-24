@@ -28,6 +28,11 @@ alias go='git checkout '
 if [ -f /etc/bash_completion.d/git ]; then
   . /etc/bash_completion.d/git
 fi
+
+if [ -f  /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
+  .  /usr/share/git-core/contrib/completion/git-prompt.sh
+fi
+
 GIT_PS1_SHOWDIRTYSTATE=true
 
 #if [ -f /opt/local/etc/bash_completion ]; then
