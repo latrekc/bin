@@ -10,7 +10,7 @@
 	ci = commit
 	br = branch
 	co = checkout
-	df = diff
+	df = diff --word-diff=color
 	lg = log -p
 	delete = rm
 	revert = checkout --  
