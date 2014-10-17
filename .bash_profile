@@ -33,6 +33,10 @@ if [ -f  /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
   .  /usr/share/git-core/contrib/completion/git-prompt.sh
 fi
 
+if [ -f ~/bin/.git-completion.sh ]; then
+    . ~/bin/.git-completion.sh
+fi
+
 GIT_PS1_SHOWDIRTYSTATE=true
 
 #if [ -f /opt/local/etc/bash_completion ]; then
