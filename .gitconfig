@@ -10,7 +10,7 @@
 	ci = commit
 	br = branch
 	co = checkout
-	df = diff --word-diff=color
+	df = diff --word-diff=color --word-diff-regex="[^[:space:],()]+|[.()]+"
 	lg = log -p
 	delete = rm
 	revert = checkout --  
@@ -18,7 +18,7 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	type = cat-file -t
 	dump = cat-file -p
-	conflicts = !git ls-files --unmerged | cut -f2 | sort -u | xargs grep -El '<<<<<<<|=======|>>>>>>>'
+	conflicts = !git ls-files --unmerged | cut -f2 | sort -u | xargs grep -El '^(<<<<<<<|=======|>>>>>>>)'
 	unmerged = !git ls-files --unmerged | cut -f2 | sort -u
 
 [user]
