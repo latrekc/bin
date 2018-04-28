@@ -1,3 +1,5 @@
 \._*
 .DS_Store
 .sass-cache
+.fuse_hidden*
+*\.swp

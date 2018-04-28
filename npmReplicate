@@ -35,3 +35,4 @@ rm -rf npm-shrinkwrap.json node_modules && \
 npm install && \
 npm shrinkwrap && \
 cat npm-shrinkwrap.json | /usr/bin/env node -e "$SCRIPT" | curl -v -X POST http://registry:registry@dragonballs.dev.mail.ru:5984/_replicate -d@- -H "Content-Type: application/json"
+rm npm-shrinkwrap.json
