@@ -45,9 +45,9 @@ GIT_PS1_SHOWDIRTYSTATE=true
 #fi
 #alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
 
-#if [ -f ~/.git-prompt.sh ]; then
-#  source ~/.git-prompt.sh
-#fi
+if [ -f ~/bin/.git-prompt.sh ]; then
+  source ~/bin/.git-prompt.sh
+fi
 
 #PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
