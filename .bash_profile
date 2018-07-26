@@ -17,8 +17,8 @@ export LC_ALL=ru_RU.UTF-8
 export LANG=ru_RU.UTF-8
 export PATH=~/bin/:$PATH
 
-export PATH=~/Library/Python/3.6/bin:"$PATH"
-export PATH=~/Code/vendor/depot_tools:"$PATH"
+#export PATH=~/Library/Python/3.6/bin:"$PATH"
+#export PATH=~/Code/vendor/depot_tools:"$PATH"
 
 alias ls='ls -G'
 
@@ -49,9 +49,10 @@ GIT_PS1_SHOWDIRTYSTATE=true
 #  source ~/.git-prompt.sh
 #fi
 
-PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+#PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+PS1='\[\033[32m\]\u@\h\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
 
-export NVM_DIR="/Users/tugovikov-new/.nvm"
+export NVM_DIR="/home/s.tugovikov/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
