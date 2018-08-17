@@ -1,0 +1,3 @@
+#!/bin/bash
+mkdir -p ~/.puppet_agent
+puppet agent -t 2>&1 | tee ~/.puppet_agent/puppet_agent_$(date +%s).log
