@@ -3,3 +3,4 @@
 .sass-cache
 .fuse_hidden*
 *\.swp
+.tokens

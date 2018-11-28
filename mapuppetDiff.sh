@@ -1,10 +1,10 @@
 #!/bin/bash
-GITLAB_TOKEN="ZY6E52-tDt_yw635pxZZ"
+. ~/bin/.tokens
 MAPUPPET_PROJECT_ID="1937"
 
 function checkDiff() {
 	BRANCH=$1
-	CNT=`curl -s --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "https://gitlab.corp.mail.ru/api/v4/projects/${MAPUPPET_PROJECT_ID}/repository/compare?to=master&from=${BRANCH}" | jq '.commits|length'`;
+	CNT=`curl -s --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "https://${GITLAB_HOST}/api/v4/projects/${MAPUPPET_PROJECT_ID}/repository/compare?to=master&from=${BRANCH}" | jq '.commits|length'`;
 	echo -e "\t${CNT}\t${BRANCH}"
 }
 
