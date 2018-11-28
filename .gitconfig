@@ -51,3 +51,5 @@
 	renames = copy
 [merge]
 	tool = opendiff
+[http]
+	cookiefile = /Users/tugovikov-new/.gitcookies

@@ -73,3 +73,12 @@ _ssh()
     return 0
 }
 complete -F _ssh ssh
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# docker completion
+if [ -f ~/bin/docker-compose.completion.sh ]; then
+  . ~/bin/docker-compose.completion.sh
+fi
+if [ -f ~/bin/docker-machine.completion.sh ]; then
+  . ~/bin/docker-machine.completion.sh
+fi
