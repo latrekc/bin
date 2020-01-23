@@ -10,7 +10,7 @@
 	ci = commit
 	br = branch
 	co = checkout
-	df = diff --word-diff=color --word-diff-regex="[^[:space:],()]+|[.()]+"
+	df = diff --word-diff=color --word-diff-regex="[^[:space:],()-/]+|[.()]+"
 	lg = log -p
 	delete = rm
 	revert = checkout --  
@@ -23,7 +23,7 @@
 
 [user]
 	name = Stanislav Tugovikov
-	email = s.tugovikov@corp.mail.ru
+	email = stanislav.t@threadsstyling.com
 
 [color]
 	diff = true
@@ -51,5 +51,3 @@
 	renames = copy
 [merge]
 	tool = opendiff
-[http]
-	cookiefile = /Users/tugovikov-new/.gitcookies

@@ -22,7 +22,7 @@ if [ $? -ne 128 ]
 then
 	# fetch changes from origin
 	printf "\n==== ${color}git fetch origin${nocolor} ====\n"
-	git fetch origin
+	git fetch origin -p
 
 	if [ "${branch#${branch%?}}" == "*" ]
 	then

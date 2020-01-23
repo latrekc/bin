@@ -1,4 +1,5 @@
 # .bashrc
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 PAGER=more;
 
@@ -39,6 +40,8 @@ if [ -f /etc/bash_completion.d/git ]; then
   . /etc/bash_completion.d/git
 fi
 GIT_PS1_SHOWDIRTYSTATE=true
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh";
 
 #if [ -f /opt/local/etc/bash_completion ]; then
 #    . /opt/local/etc/bash_completion
