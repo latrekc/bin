@@ -86,3 +86,4 @@ fi
 if [ -f ~/bin/docker-machine.completion.sh ]; then
   . ~/bin/docker-machine.completion.sh
 fi
+
