@@ -1,4 +1,4 @@
-. ~/.bash_profile
+#. ~/.bash_profile
 . ~/bin/tokens.sh
 
 export NVM_DIR="$HOME/.nvm"

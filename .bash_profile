@@ -53,7 +53,14 @@ if [ -f ~/bin/.git-prompt.sh ]; then
 fi
 
 #PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
-PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+
+if [ "$TERM_PROGRAM" = "vscode" ]; then
+	ROOT_DIR=`pwd`
+	PS1='\[\033[34m\]$(realpath --relative-to=$ROOT_DIR `pwd`)\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+else
+	PS1='\[\033[32m\]\u@\[\033[00m\]:\[\033[34m\]\w\[\033[31m\]$(__git_ps1)\[\033[00m\]\$ '
+fi
+
 
 export NVM_DIR="/home/s.tugovikov/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -87,3 +94,13 @@ if [ -f ~/bin/docker-machine.completion.sh ]; then
   . ~/bin/docker-machine.completion.sh
 fi
 
+
+. ~/.bashrc
+
+# Get the values of all SSM parameters under the given path
+ssm-for () {
+    color_on=$(tput setaf 1)
+    color_off=$(tput sgr 0)
+    aws ssm get-parameters-by-path --recursive --path "$1" --with-decryption \
+        | jq -r ".Parameters[] | .Name + \": $color_on\" + .Value + \"$color_off\""
+}

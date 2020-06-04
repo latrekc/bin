@@ -1,5 +1,5 @@
 {
-    "editor.tabSize": 8,
+    "editor.tabSize": 2,
     "editor.fontSize": 14,
     "window.zoomLevel": 0,
     "typescript.updateImportsOnFileMove.enabled": "always",
@@ -29,7 +29,7 @@
     },
     "circleci.apiKey": "ddda239738c819523f7c501dc4b5d4effb478585",
     "circleci.rate": 60,
-    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.ignoreTrimWhitespace": true,
     "editor.renderWhitespace": "all",
     "peacock.favoriteColors": [
         {
@@ -101,5 +101,15 @@
         "**/lib/**",
         "**/node_modules/**"
     ],
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "jest.enableInlineErrorMessages": true,
+    "jest.autoEnable": false,
+    "jest.runAllTestsFirst": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "react-native.packager.port": 19001,
+    "workbench.startupEditor": "readme",
+    "python.jediEnabled": false,
+    "sqltools.connections": [
+    ]
 }
