@@ -110,6 +110,14 @@
     "react-native.packager.port": 19001,
     "workbench.startupEditor": "readme",
     "python.jediEnabled": false,
-    "sqltools.connections": [
-    ]
+    "extensions.ignoreRecommendations": false,
+    "explorer.confirmDragAndDrop": false,
+    "git.suggestSmartCommit": false,
+    "python.analysis.logLevel": "Information",
+    "python.linting.mypyCategorySeverity.error": "Information",
+    "python.linting.pylintCategorySeverity.error": "Warning",
+    "python.linting.flake8Args": [
+        "--ignore=E501,E127,E128,W191"
+    ],
+    "python.languageServer": "Microsoft"
 }

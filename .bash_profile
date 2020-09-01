@@ -14,8 +14,8 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 # User specific aliases and functions
-export LC_ALL=ru_RU.UTF-8
-export LANG=ru_RU.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 export PATH=~/bin/:$PATH
 
 #export PATH=~/Library/Python/3.6/bin:"$PATH"
@@ -104,3 +104,31 @@ ssm-for () {
     aws ssm get-parameters-by-path --recursive --path "$1" --with-decryption \
         | jq -r ".Parameters[] | .Name + \": $color_on\" + .Value + \"$color_off\""
 }
+
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# Connect to the DB by SSM parameters
+psql-for () {
+	if [[ -z $1 ]]
+	then
+		echo "Empty service name"
+		return 1
+	fi
+
+	if [[ -z $2 ]]
+	then
+		echo "Empty environment name"
+		return 2
+	fi
+
+	local _PREFIX="/databases/rds-pg-threads-main/threads_main/$1"
+	echo "Connect to $_PREFIX ..."
+
+	eval `AWS_PROFILE="threads-$2" aws ssm get-parameters-by-path --recursive --path "$_PREFIX" --with-decryption | jq -r ".Parameters[] | \"local _\"+(.Name|sub(\"$_PREFIX/\";\"\")|ascii_upcase) + \"='\" + .Value + \"';\""`
+	echo "host ${_HOST}"
+	PGPASSWORD="$_PASSWORD" psql -U $_USER -h $_HOST $_DB
+} 
