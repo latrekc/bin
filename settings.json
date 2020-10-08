@@ -119,5 +119,6 @@
     "python.linting.flake8Args": [
         "--ignore=E501,E127,E128,W191"
     ],
-    "python.languageServer": "Microsoft"
+    "python.languageServer": "Microsoft",
+    "terminal.integrated.scrollback": 2048
 }
