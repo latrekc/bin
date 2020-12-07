@@ -91,7 +91,7 @@
     "terminal.integrated.experimentalUseTitleEvent": true,
     "terminal.integrated.splitCwd": "inherited",
     "files.associations": {
-        "*.sql": "postgres"
+        "*.sql": "sql"
     },
     "jscpd.skipComments": true,
     "jscpd.exclude": [
@@ -119,6 +119,6 @@
     "python.linting.flake8Args": [
         "--ignore=E501,E127,E128,W191"
     ],
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Pylance",
     "terminal.integrated.scrollback": 2048
 }

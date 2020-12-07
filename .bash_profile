@@ -111,6 +111,40 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+
+# Connect to the replica DB by SSM parameters
+psql-replica () {
+	if [[ -z $1 ]]
+	then
+		echo "Empty environment name"
+		return 1
+	fi
+
+	case $1 in 
+		production) replicaPath="replica-dev";;
+		staging) replicaPath="replica-analytics";;
+		*) echo "Wrong environment name $1"; return 2;;
+	esac
+
+	local _REPLICA_PREFIX="/databases/rds-pg-threads-main-$replicaPath"
+	echo "Connect to $_REPLICA_PREFIX ..."
+
+	eval `AWS_PROFILE="threads-$1" aws ssm get-parameters-by-path --recursive --path "$_REPLICA_PREFIX" --with-decryption | jq -r ".Parameters[] | \"local _REPLICA_\"+(.Name|sub(\"$_REPLICA_PREFIX/\";\"\")|ascii_upcase) + \"='\" + .Value + \"';\""`
+
+
+	local _RO_PREFIX="/databases/rds-pg-threads-main/threads_main/analyticsro"
+	echo "Connect to $_RO_PREFIX ..."
+
+	eval `AWS_PROFILE="threads-$1" aws ssm get-parameters-by-path --recursive --path "$_RO_PREFIX" --with-decryption | jq -r ".Parameters[] | \"local _RO_\"+(.Name|sub(\"$_RO_PREFIX/\";\"\")|ascii_upcase) + \"='\" + .Value + \"';\""`
+
+	if [[ -z $3 ]]
+	then
+		PGPASSWORD="$_RO_PASSWORD" psql -U $_RO_USER -h $_REPLICA_HOST $_RO_DB
+	else
+		PGPASSWORD="$_RO_PASSWORD" psql -U $_RO_USER -h $_REPLICA_HOST $_RO_DB -c "$3"
+	fi
+}
+
 # Connect to the DB by SSM parameters
 psql-for () {
 	if [[ -z $1 ]]
@@ -130,5 +164,11 @@ psql-for () {
 
 	eval `AWS_PROFILE="threads-$2" aws ssm get-parameters-by-path --recursive --path "$_PREFIX" --with-decryption | jq -r ".Parameters[] | \"local _\"+(.Name|sub(\"$_PREFIX/\";\"\")|ascii_upcase) + \"='\" + .Value + \"';\""`
 	echo "host ${_HOST}"
-	PGPASSWORD="$_PASSWORD" psql -U $_USER -h $_HOST $_DB
+
+	if [[ -z $3 ]]
+	then
+		PGPASSWORD="$_PASSWORD" psql -U $_USER -h $_HOST $_DB
+	else
+		PGPASSWORD="$_PASSWORD" psql -U $_USER -h $_HOST $_DB -c "$3"
+	fi
 } 
