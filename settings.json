@@ -1,7 +1,5 @@
 {
-    "editor.tabSize": 2,
     "editor.fontSize": 14,
-    "window.zoomLevel": 0,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "workbench.colorTheme": "GitHub Plus",
     "workbench.colorCustomizations": {
@@ -29,7 +27,6 @@
     },
     "circleci.apiKey": "ddda239738c819523f7c501dc4b5d4effb478585",
     "circleci.rate": 60,
-    "diffEditor.ignoreTrimWhitespace": true,
     "editor.renderWhitespace": "all",
     "peacock.favoriteColors": [
         {
@@ -117,8 +114,68 @@
     "python.linting.mypyCategorySeverity.error": "Information",
     "python.linting.pylintCategorySeverity.error": "Warning",
     "python.linting.flake8Args": [
-        "--ignore=E501,E127,E128,W191"
+        "--ignore=E501,E127,E128,W191,W503"
     ],
     "python.languageServer": "Pylance",
-    "terminal.integrated.scrollback": 2048
+    "terminal.integrated.scrollback": 2048,
+    "cSpell.userWords": [
+        "DHL's",
+        "Fulfilments",
+        "alipay",
+        "apac",
+        "astext",
+        "atomicwrites",
+        "boto",
+        "botocore",
+        "certifi",
+        "chardet",
+        "compat",
+        "customdeploy",
+        "customscript",
+        "dateutil",
+        "docutils",
+        "ecourier",
+        "fulfilment",
+        "goshippo",
+        "gsuite",
+        "idna",
+        "ifli",
+        "inhq",
+        "itertools",
+        "jmespath",
+        "jobid",
+        "memoizee",
+        "netsuite",
+        "noqa",
+        "pdac",
+        "pipfile",
+        "pluggy",
+        "postgres",
+        "preorder",
+        "psycopg",
+        "pypi",
+        "pytest",
+        "reraised",
+        "restlet",
+        "rsps",
+        "sessionid",
+        "shippo",
+        "soif",
+        "soii",
+        "sois",
+        "structlog",
+        "threadsbuy",
+        "tsbuildinfo",
+        "txend",
+        "txid",
+        "txtype",
+        "upsert",
+        "urllib",
+        "wechat",
+        "zeep"
+    ],
+    "python.analysis.extraPaths": [
+        "parcels_api"
+    ],
+    "editor.tabSize": 2
 }
